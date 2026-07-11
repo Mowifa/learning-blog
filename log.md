@@ -11,4 +11,11 @@
 * Service:所有具体的业务逻辑
 * Mapper:负责和数据库交互,简单的增删改查之类的
 * tip:不同用途的数据对象不要混在一起:数据库里的用户用User;接受请求用ReviewRequest;返回结果用ReviewResponse
-* 
+## 一些
+* Rest Controller?  
+其实它就是说,请求的东西不是网页,而是JSON,要直接返回给客户端
+* 跟Controller的区别?  
+Controller接收到请求会去找html,rest可以帮我调用jackson,返回json
+### 到这里有一个新的问题,怎么处理用户发送的数据?  
+答:用户发送json后,spring boot把json变成pojo,然后再由controller接收,service处理,返回的信息再给pojo,spring boot再变回json返回给用户  
+学到这里不禁觉得,是我误会pojo了,原来是这么有用的东西...
