@@ -28,7 +28,6 @@ Controller接收到请求会去找html,rest可以帮我调用jackson,返回json
 ### 注解
 * @SpringBootApplication:标注这个类是一个springboot的应用,且启动类下的所有资源都被导入   
 
-* ...源码还是有很多看不懂的地方,之后再来看吧
 ## 启动:run
 * run并非运行了一个main方法,而是启动了一个服务.   
 在做DemoApplication.run时,其实做了四件事:   
@@ -36,3 +35,22 @@ Controller接收到请求会去找html,rest可以帮我调用jackson,返回json
 2.查找并加载所有可用的初始化器,设置到initializers属性中  
 3.找出所有应用程序监听器,设置到listeners属性中,用于监听上下文和组件  
 4.推断并设置main方法的定义类,找到运行的主类  
+## Controller中前后端传参的实现
+* 用@RequestParam注解进行前后端传参,为问号传参(?name=张三)
+  //    public String hello(@RequestParam(defaultValue = "") String name) {
+  //        System.out.println(name);
+* 从路径中进行前后端传参,为路径传参,直接输入路径
+  //    @GetMapping("/hello/{name}")
+  //    public String hello(@PathVariable String name){
+  //        System.out.println(name);
+* 使用requestbody进行传参   
+* 因为前端会用一个json文件把数据传过来,所以首先需要定义一个   
+定义一个接收这些实体的entity包,再在包内新建需要的类,eg:User   
+然后在类中写明这个类所有需要的属性以及get set方法(alt+G)   
+对于controller类的实现具体如下,主要用到两个注解:   
+  (@PostMapping:决定请求交给哪个方法处理   
+,@RequestBody:把请求体内的数据转换为Java对象)
+  @PostMapping("/user")
+  public String hello(@RequestBody User user){
+  System.out.println("name:"+user.getName());
+  System.out.println("age:"+user.getAge());}
