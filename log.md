@@ -54,3 +54,19 @@ Controller接收到请求会去找html,rest可以帮我调用jackson,返回json
   public String hello(@RequestBody User user){
   System.out.println("name:"+user.getName());
   System.out.println("age:"+user.getAge());}
+## RESTFul接口
+* 通过路径直接传值而非通过key=...,用{}进行包裹
+* 访问路径不变,通过@RequestMapping("/user")写在类外面减少冗余,即通过@RequestMapping为单个控制器添加访问前缀
+  @PostMapping:实现新增
+  @GetMapping:实现查找(整体查找和单独查找)
+  @PutMapping:实现新增
+  @DeleteMapping:实现删除
+* 一个controller包下可以存在多个controller类,如果出现报错很有可能是识别问题   
+去project structure里面改版本,jdk和语言版本要统一
+* 通过application.yaml为所有控制器添加前缀:server.servlet:
+  context-path: /api
+* 关于多环境配置:   
+以application-???规范命名,再在application.yaml中通过
+  spring.profiles:
+  active: dev   
+实现多版本的切换
